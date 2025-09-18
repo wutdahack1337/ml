@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -5,11 +6,14 @@ import matplotlib.pyplot as plt
 from sklearn import linear_model
 from sklearn.metrics import mean_squared_error
 
-dt = pd.read_csv("data/housing.csv", index_col=0)
-X = dt.iloc[0:520, [1, 2, 3, 4, 10]]
-Y = dt.price[0:520]
-X_test = dt.iloc[-20:, [1, 2, 3, 4, 10]]
-Y_test = dt.price[-20:]
+dt = pd.read_csv(os.path.join(os.path.dirname(__file__), "data", "housing.csv"), index_col=0)
+
+FEATURE_COLS = ["lotsize", "bedrooms", "bathrms", "stories", "garagepl"]
+TRAIN_SIZE = int(0.95*len(dt))
+X = dt.loc[:TRAIN_SIZE-1, FEATURE_COLS]
+Y = dt.loc[:TRAIN_SIZE-1, "price"]
+X_test = dt.loc[TRAIN_SIZE:, FEATURE_COLS]
+Y_test = dt.loc[TRAIN_SIZE:, "price"]
 
 plt.scatter(dt.lotsize, dt.price)
 plt.show()
