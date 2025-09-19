@@ -18,18 +18,14 @@ def LR1(X, Y, epochs, learning_rate, theta0, theta1):
 def LR2(X, Y, epochs, learning_rate, theta0, theta1):
     m = len(X)
     for epoch in range(epochs):
-        # print(f"\n=== Epoch {epoch} ===")
-        # print(f"theta0 = {theta0:0.9f}, theta1 = {theta1:0.9f}")
+        print(f"\n=== Epoch {epoch} ===")
+        print(f"theta0 = {theta0:0.9f}, theta1 = {theta1:0.9f}")
 
-        sum_theta0 = 0
-        sum_theta1 = 0
-        for i in range(0, m):
-            h = theta0 + theta1*X[i]
-            sum_theta0 += (h - Y[i])*1
-            sum_theta1 += (h - Y[i])*X[i]
+        h = theta0 + theta1*X
+        error = h - Y
     
-        theta0 = theta0 - learning_rate*sum_theta0
-        theta1 = theta1 - learning_rate*sum_theta1
+        theta0 = theta0 - learning_rate*np.sum(error)
+        theta1 = theta1 - learning_rate*np.sum(error*X)
     return [theta0, theta1]
 
 X = np.array([147,  150, 153, 155, 158, 160, 163, 165, 168, 170, 173, 175, 178, 180])
@@ -69,10 +65,6 @@ print(f"Pred = {Y_pred} -> Real = {Y_test}")
 theta = LR2(X, Y, 4, 0.000003, 0, 0.5)
 Y_pred = theta[0] + theta[1]*X_test
 print(f"Pred = {Y_pred} -> Real = {Y_test}")
-    # epochs = 100 
-theta = LR2(X, Y, 100, 0.000003, 0, 0.5)
-Y_pred = theta[0] + theta[1]*X_test
-print(f"Pred = {Y_pred} -> Real = {Y_test}")
 
     # learning_rate = 0.000002, theta0 = 0, theta1 = 0.5
         # epochs = 2
@@ -81,10 +73,6 @@ Y_pred = theta[0] + theta[1]*X_test
 print(f"Pred = {Y_pred} -> Real = {Y_test}")
         # epochs = 10
 theta = LR2(X, Y, 10, 0.000002, 0, 0.5)
-Y_pred = theta[0] + theta[1]*X_test
-print(f"Pred = {Y_pred} -> Real = {Y_test}")
-    # epochs = 100 
-theta = LR2(X, Y, 100, 0.000002, 0, 0.5)
 Y_pred = theta[0] + theta[1]*X_test
 print(f"Pred = {Y_pred} -> Real = {Y_test}")
 
