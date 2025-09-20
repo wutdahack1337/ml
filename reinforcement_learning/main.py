@@ -10,9 +10,9 @@ maze = np.array([
 start = (0, 0)
 goal  = (4, 4)
 max_steps = 100
-episodes = 100
+episodes = 200
 
-q_table = np.zeros((25, 4))
+q_table = np.zeros((maze.shape[0]*maze.shape[1], 4))
 learning_rate = 0.1
 gamma = 0.9
 epsilon = 0.1
@@ -50,7 +50,7 @@ def get_action(state):
 
     return action
 
-def learn(state, action, next_state):
+def learn(state, action, next_state, reward):
     q_value = q_table[state_to_index(state), action]
     next_max = np.max(q_table[state_to_index(next_state)])
     q_table[state_to_index(state), action] = q_value + learning_rate*(reward + gamma*next_max - q_value)
@@ -62,17 +62,20 @@ for _ in range(episodes):
         action = get_action(state)
         next_state, reward = step(state, action)
 
-        learn(state, action, next_state)
+        learn(state, action, next_state, reward)
 
         state = next_state
         if state == goal:
             break
 
 state = start
+step_counter = 0
+
 maze[start] = 7
-while state != goal:
+while state != goal and step_counter < max_steps:
     action = np.argmax(q_table[state_to_index(state)])
     state, _ = step(state, action)
+    step_counter += 1
     maze[state] = 7
 
 print(maze)
