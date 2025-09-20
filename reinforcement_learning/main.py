@@ -18,7 +18,7 @@ gamma = 0.9
 epsilon = 0.1
 
 def state_to_index(state):
-    return state[0]*5 + state[1]
+    return state[0]*maze.shape[1] + state[1]
 
 def step(state, action):
     x, y = state
@@ -31,7 +31,7 @@ def step(state, action):
     else:
         next_x, next_y = x, y+1
 
-    if (next_x < 0 or next_x >= 5 or next_y < 0 or next_y >= 5 or maze[next_x, next_y] == 1):
+    if (next_x < 0 or next_x >= maze.shape[0] or next_y < 0 or next_y >= maze.shape[1] or maze[next_x, next_y] == 1):
         return state, -5
     
     next_state = (next_x, next_y)
