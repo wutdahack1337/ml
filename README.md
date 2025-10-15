@@ -1,5 +1,5 @@
-# CT202-labs
-Principles of machine learning labs
+# ml
+Machine learning labs
 
 - [ ] Problem set 0
 - [x] Linear Regression
