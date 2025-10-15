@@ -2,15 +2,14 @@
 Machine learning labs
 
 - [ ] Problem set 0
-- [x] Linear Regression
+- [x] Linear Regression lecture
 - [ ] Linear Algebra
-- [x] Logistic Regression
-- [ ] Perceptron lecture
+- [x] Logistic Regression lecture
+- [x] Perceptron lecture
 - [ ] Problem set 1
 - [ ] Probability
-- [ ] Naive Bayes
-- [ ] Laplace Smoothing
+- [x] Naive Bayes & Laplace Smoothing lectures
 - [ ] Python
 - [ ] Problem set 2
 - [ ] Learning Theory
-- [ ] Tree Ensembles
+- [ ] Tree Ensembles lecture
